@@ -1,7 +1,7 @@
 # Analyzing Power Outages
 **Project for DSC 80 at UCSD**
 
-By [Kaushik Agastyaraju]
+By Kaushik Agastyaraju
 
 ---
 
@@ -80,19 +80,59 @@ The dataset was cleaned using the following steps:
   frameborder="0"
 ></iframe>
 
-
 - **Cause Categories:** Severe weather accounted for the majority of outages.
+
+<iframe
+  src="assets/customers_affected_distribution.html"
+  width="800"
+  height="650"
+  frameborder="0"
+></iframe>
+
+
 
 #### Bivariate Analysis
 1. **Outage Duration vs. Customers Affected:** 
-   - Positive correlation, though some short outages affected many customers.
+   - Positive correlation, though some short outages affected many customers.` 
+   
+<iframe
+  src="assets/scatter_outage_duration_vs_customers.html"
+  width="800"
+  height="650"
+  frameborder="0"
+></iframe>
+
+
 2. **Outage Duration vs. Cause Category:** 
    - Severe weather caused longer outages than intentional attacks.
 
+<iframe
+  src="assets/scatter_outage_duration_by_cause.html"
+  width="800"
+  height="650"
+  frameborder="0"
+></iframe>
+
+   
+
 #### Grouping and Aggregates
 - **By NERC Region:** Grouped data showed average outage durations and customers affected by region.
+
+<iframe
+  src="assets/climate_agg_outages.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
 - **By Climate Region and Cause:** Pivot table revealed severe weather as the primary cause in most regions.
 
+<iframe
+  src="assets/pivot_duration.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
 ---
 
 ## Assessment of Missingness
