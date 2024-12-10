@@ -144,35 +144,98 @@ From there I looked at the distribution of customers affected. This was to under
 `OUTAGE.DURATION` is likely **Not Missing at Random (NMAR)** because its missingness depends on whether reporting agencies provided this information during the outages.
 
 ### Dependency Analysis
+
+Analyzing the dependency of missing values in the duration column provides valuable insights for better data imputation strategies. These dependencies can help identify patterns or relationships that contribute to missing data, enabling more informed and accurate imputation methods.
+
+To better understand the missingness dependecy of the duration column I will test with cause category and customers affected. 
+
 1. **Cause Category:**
 
+The first step in missingness dependecy is to look at the distribution of cause category given the missingness of duration. similiarites in these bars may indiicate a dependency. 
+
 <iframe
-  src="assets/cause_category_duration_missing.html"
+  src="assets/cause_category_vs_duration_missing.html"
   width="100%"
   height="400"
   frameborder="0"
 ></iframe>
 
+**Null Hypothesis:** The distribution of cause category is the same when Duration is missing vs not missing
+
+**Alternate Hypothesis:** The distribution of cause category is the different when Duration is missing vs not missing
+
+
+<iframe
+  src="assets/permutation_tvd_distribution.html"
+  width="600"
+  height="450"
+  frameborder="0"
+></iframe>
+
    - Observed Total Variation Distance (TVD): **0.469**
    - P-value: **0.0**
-   - Conclusion: Missingness in `OUTAGE.DURATION` depends on `CAUSE.CATEGORY`.
+   - Conclusion: This p-value indicates rejection of the null hypothesis in favor of the alterhante meaning Missingness in `OUTAGE.DURATION` liekley depends on `CAUSE.CATEGORY`.
+
 
 2. **Month:**
-   - Observed TVD: **0.143**
-   - P-value: **0.176**
-   - Conclusion: Missingness in `OUTAGE.DURATION` does not depend on `MONTH`.
+
+   Here we look at a violin plot showing the distribution of cause category given the missingness of duration. 
+
+<iframe
+  src="assets/customers_affected_violinplot.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
+**Null Hypothesis:** The distribution of customers affected is the same when Duration is missing vs not missing
+
+**Alternate Hypothesis:** The distribution of customers affected is different when Duration is missing vs not missing
+
+
+<iframe
+  src="assets/permutation_mean_difference.html"
+  width="600"
+  height="450"
+  frameborder="0"
+></iframe>
+
+   - Observed Difference in Means: **-7685.716**
+   - P-value: **0.8980**
+   - Conclusion: At This p-value we fail to reject the null hypothesis in favor of the alterhante meaning the distribtuion is not very different wehn duration is missing, meaning there is likely no dependency between the missingness of Duration and the Customers Affected
 
 ---
 
-## Hypothesis Testing
-### Hypothesis
-- **Null Hypothesis:** The mean duration of severe weather outages equals intentional attack outages.
-- **Alternative Hypothesis:** Severe weather outages have a longer mean duration.
+### Hypothesis Test: Outage Duration and Residential Electricity Prices
 
-### Results
-- Observed difference in means: [Add value].
-- P-value: **0.0**
-- Conclusion: Severe weather outages last significantly longer than intentional attack outages.
+For this section I will be testing whetere outage duration differs between low and high residiantial price areas.
+
+#### Hypotheses:
+- **Null (\(H_0\))**: The mean outage duration is the same for low and high residential electricity price areas.
+- **Alternative (\(H_A\))**: The mean outage duration differs between low and high residential electricity price areas.
+
+#### Test Statistic and Significance Level:
+- **Test Statistic**: I chose the difference in means (\( \text{Mean}_{\text{low}} - \text{Mean}_{\text{high}} \)) because it directly compares the groups of interest.
+- **Significance Level (\( \alpha \))**: I used a standard significance level of 0.05.
+
+#### Results:
+- **Observed Difference**: \( 397.914 \) minutes.
+- **P-value**: \( 0.1970 \).
+
+#### Conclusion:
+Since the p-value (\( 0.1970 \)) is greater than \( \alpha = 0.05 \), I fail to reject the null hypothesis. There isn’t enough evidence to conclude that outage durations differ significantly between low and high residential electricity price areas. The observed difference could simply be due to random chance.
+
+#### Visualization:
+Below is a histogram showing the empirical distribution of permutation differences. The dashed red line represents the observed difference.
+
+<iframe
+  src="assets/permutation_diff_price_group.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
 
 ---
 
