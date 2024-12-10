@@ -10,7 +10,7 @@ Welcome! My name is Kaushik Agastyaraju and I recently completed analyis on a da
 
 This project was mean to investigates a dataset of major power outages in the U.S. that took place from January 2000 to July 2016. These power outages, as defined by the Department of Energy, were included in the dataset if they impacted at least 50,000 customers or caused an unplanned energy demand loss of at least 300 megawatts. The dataset includes many features of data including: geographical, climatic, economic, and land-use data about the states affected. And by conducting open ended analysis I attempted to uncover a very small subset of the trends buried within this dataset. 
 
-Uplading and understanding the data was the first step in this process. I downloaded the data from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages.
+Uplpading and understanding the data was the first step in this process. I downloaded the data from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages.
 
 From there I took steps to clean the dataset which would then allow me to perform exploratory data analysis, first through varaible analsysis, then through variable missingness and finally through statistical testing. After loading in the data and observing the features of power outages I decided on my main research question for this analysis:
 
@@ -69,7 +69,18 @@ The dataset was cleaned using the following steps:
 ### Exploratory Data Analysis
 
 #### Univariate Analysis
+
+
 - **Outage Duration:** Most outages lasted under 2000 minutes, but a few extreme cases exceeded 3000 minutes.
+
+<iframe
+  src="assets/outage_duration_distribution.html)"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
 - **Cause Categories:** Severe weather accounted for the majority of outages.
 
 #### Bivariate Analysis
