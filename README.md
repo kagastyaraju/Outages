@@ -76,7 +76,7 @@ The dataset was cleaned using the following steps:
 <iframe
   src="assets/outage_duration_distribution.html"
   width="800"
-  height="600"
+  height="650"
   frameborder="0"
 ></iframe>
 
