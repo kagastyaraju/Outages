@@ -74,7 +74,7 @@ The dataset was cleaned using the following steps:
 - **Outage Duration:** Most outages lasted under 2000 minutes, but a few extreme cases exceeded 3000 minutes.
 
 <iframe
-  src="assets/outage_duration_distribution.html)"
+  src="assets/outage_duration_distribution.html"
   width="800"
   height="600"
   frameborder="0"
