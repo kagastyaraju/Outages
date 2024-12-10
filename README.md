@@ -138,10 +138,18 @@ The dataset was cleaned using the following steps:
 ## Assessment of Missingness
 
 ### NMAR Analysis
-`CUSTOMERS.AFFECTED` is likely **Not Missing at Random (NMAR)** because its missingness depends on whether reporting agencies provided this information during the outages.
+`OUTAGE.DURATION` is likely **Not Missing at Random (NMAR)** because its missingness depends on whether reporting agencies provided this information during the outages.
 
 ### Dependency Analysis
 1. **Cause Category:**
+
+<iframe
+  src="assets/cause_category_duration_missing.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
    - Observed Total Variation Distance (TVD): **0.469**
    - P-value: **0.0**
    - Conclusion: Missingness in `OUTAGE.DURATION` depends on `CAUSE.CATEGORY`.
