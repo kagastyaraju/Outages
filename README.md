@@ -67,29 +67,32 @@ The dataset was cleaned using the following steps:
 4. **Urban Feature Engineering:** Combined urban population statistics (`POPPCT_URBAN`, `POPDEN_URBAN`, and `AREAPCT_URBAN`) into a single column representing urban characteristics.
 
 ### Exploratory Data Analysis
+ - Exploratory data analysis of the outages dataset allowed me to better understand the data I was working with: Understand the features and thier relations. These steps would allow me to stage more complex missingness and modeling questions later in the project
 
-#### Univariate Analysis
+#### Univariate Analysis - Exploring single Variables
 
-
-- **Outage Duration:** Most outages lasted under 2000 minutes, but a few extreme cases exceeded 3000 minutes.
+My univariatne analysis began with looking at the distribution of outages durations to understand the frequency of outage durations in the dataset
 
 <iframe
   src="assets/outage_duration_distribution.html"
-  width="800"
-  height="650"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
 
-- **Cause Categories:** Severe weather accounted for the majority of outages.
+- **Outage Duration:** A majority of outages lasted under 5000 minutes, less than 250 happened between 5000 and 20000, but a few extreme cases exceeded 3000 minutes.
+
+
+From there I looked at the distribution of customers affected. This was to understand the frequency of customers affected for each otuages across the dataset
 
 <iframe
   src="assets/customers_affected_distribution.html"
-  width="800"
-  height="650"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
 
-
+- **Customers Affected:** The distribution of customers affected is heavily skewed right, meaning the majority outages affected less than 1 million people, with a few cases affecting more
 
 #### Bivariate Analysis
 1. **Outage Duration vs. Customers Affected:** 
@@ -97,8 +100,8 @@ The dataset was cleaned using the following steps:
    
 <iframe
   src="assets/scatter_outage_duration_vs_customers.html"
-  width="800"
-  height="650"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -108,15 +111,15 @@ The dataset was cleaned using the following steps:
 
 <iframe
   src="assets/scatter_outage_duration_by_cause.html"
-  width="800"
-  height="650"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
 
    
 
 #### Grouping and Aggregates
-- **By NERC Region:** Grouped data showed average outage durations and customers affected by region.
+- **By NERC Region:** Grouping the data by climate regeion allowed me to look at the sum and average of customers affect by each region.
 
 <iframe
   src="assets/climate_agg_outages.html"
@@ -125,7 +128,7 @@ The dataset was cleaned using the following steps:
   frameborder="0"
 ></iframe>
 
-- **By Climate Region and Cause:** Pivot table revealed severe weather as the primary cause in most regions.
+- **By Climate Region and Cause:** Creating a pivot table and grouping by cause category and climate region further grouped the data allowing me to look at primary causes of outages based on region which can reveal issues within any specific region.
 
 <iframe
   src="assets/pivot_duration.html"
