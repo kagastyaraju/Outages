@@ -1,35 +1,61 @@
 # Analyzing Power Outages
 **Project for DSC 80 at UCSD**
 
-By [Your Name]
+By [Kaushik Agastyaraju]
 
 ---
 
 ## Introduction
-This project investigates a dataset of major power outages in the U.S. from January 2000 to July 2016. These outages, as defined by the Department of Energy, impacted at least 50,000 customers or caused an unplanned energy demand loss of at least 300 megawatts. The dataset includes geographical, climatic, economic, and land-use data about the states affected.
+Welcome! My name is Kaushik Agastyaraju and I recently completed analyis on a dataset of power outages. The following will be an explanation of my processes and analysis.
+
+This project was mean to investigates a dataset of major power outages in the U.S. that took place from January 2000 to July 2016. These power outages, as defined by the Department of Energy, were included in the dataset if they impacted at least 50,000 customers or caused an unplanned energy demand loss of at least 300 megawatts. The dataset includes many features of data including: geographical, climatic, economic, and land-use data about the states affected. And by conducting open ended analysis I attempted to uncover a very small subset of the trends buried within this dataset. 
+
+Uplading and understanding the data was the first step in this process. I downloaded the data from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages.
+
+From there I took steps to clean the dataset which would then allow me to perform exploratory data analysis, first through varaible analsysis, then through variable missingness and finally through statistical testing. After loading in the data and observing the features of power outages I decided on my main research question for this analysis:
 
 ### Research Question
 The primary question explored is:
 **What are the key factors influencing outage duration and its severity, and how can we predict the cause of an outage?**
 
-Understanding these factors can help energy companies prepare for outages caused by weather, infrastructure failures, or intentional attacks.
+Understanding how long power outages last is essential for helping communities recover and build resilience. The length of an outage doesn’t just show how severe the issue was—it also reveals how quickly and efficiently power is restored. Longer outages can have ripple effects, disrupting vital services like healthcare and communication, impacting local economies, and even putting public safety at risk. By examining what causes these delays, energy companies can uncover key challenges, such as aging infrastructure, delays in deploying repair teams, or the sheer size of the incident. This understanding can guide better planning, ensuring resources are in place to respond faster and reduce the impact on everyday life.
+
 
 ### Dataset Details
-The original dataset contains **1534 rows** and **57 columns**, with a focus on the following key features:
 
-| **Column**             | **Description**                                                                                      |
-|------------------------|----------------------------------------------------------------------------------------------------|
-| `YEAR`                | Year an outage occurred                                                                           |
-| `MONTH`               | Month an outage occurred                                                                          |
-| `U.S._STATE`          | State where the outage occurred                                                                   |
-| `NERC.REGION`         | North American Electric Reliability Corporation (NERC) regions involved in the outage            |
-| `CLIMATE.REGION`      | U.S. Climate regions as defined by the National Centers for Environmental Information              |
-| `CAUSE.CATEGORY`      | Categories describing the cause of the outage                                                     |
-| `OUTAGE.DURATION`     | Duration of the outage (in minutes)                                                               |
-| `CUSTOMERS.AFFECTED`  | Number of customers affected                                                                      |
-| `DEMAND.LOSS.MW`      | Amount of energy demand lost during the outage (in megawatts)                                     |
+The dataset contains **1534 rows** and focuses on the following relevant columns for analysis:
 
----
+| **Column**               | **Description**                                                                                           | **Data Type**       |
+|---------------------------|-----------------------------------------------------------------------------------------------------------|---------------------|
+| `YEAR`                   | Year when the outage occurred                                                                             | Integer            |
+| `MONTH`                  | Month when the outage occurred                                                                            | Integer            |
+| `U.S._STATE`             | State where the outage occurred                                                                           | String             |
+| `NERC.REGION`            | North American Electric Reliability Corporation (NERC) region involved in the outage                     | String             |
+| `CLIMATE.REGION`         | U.S. Climate regions as specified by the National Centers for Environmental Information                   | String             |
+| `ANOMALY.LEVEL`          | Oceanic El Niño/La Niña (ONI) index for the cold and warm episodes by season                              | Float              |
+| `CLIMATE.CATEGORY`       | Classification of the climate episode as "Warm," "Cold," or "Normal" based on ONI threshold              | String             |
+| `OUTAGE.START.DATE`      | Day of the year when the outage started                                                                   | Date               |
+| `OUTAGE.START.TIME`      | Time of day when the outage started                                                                       | Time               |
+| `OUTAGE.RESTORATION.DATE`| Day of the year when power was restored                                                                   | Date               |
+| `OUTAGE.RESTORATION.TIME`| Time of day when power was restored                                                                       | Time               |
+| `OUTAGE.DURATION`        | Duration of the outage (in minutes)                                                                       | Integer/Float      |
+| `CAUSE.CATEGORY`         | Broad category of the cause of the outage                                                                 | String             |
+| `CAUSE.CATEGORY.DETAIL`  | Detailed description of the specific cause of the outage                                                  | String             |
+| `HURRICANE.NAMES`        | Name of the hurricane (if the outage was hurricane-related)                                               | String (Nullable)  |
+| `DEMAND.LOSS.MW`         | Amount of peak demand lost during the outage (in megawatts)                                               | Float              |
+| `CUSTOMERS.AFFECTED`     | Number of customers affected by the outage                                                                | Integer            |
+| `POPULATION`             | Population in the state where the outage occurred                                                        | Integer            |
+| `POPPCT_URBAN`           | Percentage of the state's population living in urban areas                                                | Float              |
+| `POPDEN_URBAN`           | Population density of urban areas (persons per square mile)                                               | Float              |
+| `POPDEN_RURAL`           | Population density of rural areas (persons per square mile)                                               | Float              |
+| `TOTAL.PRICE`            | Average monthly electricity price in the state (cents/kilowatt-hour)                                      | Float              |
+| `RES.PRICE`              | Monthly electricity price in the residential sector (cents/kilowatt-hour)                                 | Float              |
+| `TOTAL.SALES`            | Total electricity consumption in the state (megawatt-hour)                                                | Float              |
+| `RES.SALES`              | Electricity consumption in the residential sector (megawatt-hour)                                         | Float              |
+| `IND.SALES`              | Electricity consumption in the industrial sector (megawatt-hour)                                          | Float              |
+
+This  selection of columns ensures focus on essential data for understanding and analyzing power outages, their duration, and their impacts across the U.S.
+
 
 ## Data Cleaning and Exploratory Data Analysis
 
