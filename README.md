@@ -1,4 +1,4 @@
-# Analyzing Power Outages
+# Whens The Power Coming back? : Analyzing Power Outages
 **Project for DSC 80 at UCSD**
 
 By Kaushik Agastyaraju
