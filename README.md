@@ -5,10 +5,11 @@ By Kaushik Agastyaraju
 
 ---
 
-## Introduction
+## **Introduction**
+
 Welcome! My name is Kaushik Agastyaraju and I recently completed analyis on a dataset of power outages. The following will be an explanation of my processes and analysis.
 
-This project was mean to investigates a dataset of major power outages in the U.S. that took place from January 2000 to July 2016. These power outages, as defined by the Department of Energy, were included in the dataset if they impacted at least 50,000 customers or caused an unplanned energy demand loss of at least 300 megawatts. The dataset includes many features of data including: geographical, climatic, economic, and land-use data about the states affected. And by conducting open ended analysis I attempted to uncover a very small subset of the trends buried within this dataset. 
+This project was meant to investigate a dataset of major power outages in the U.S. that took place from January 2000 to July 2016. These power outages, as defined by the Department of Energy, were included in the dataset if they impacted at least 50,000 customers or caused an unplanned energy demand loss of at least 300 megawatts. The dataset includes many features of data including: geographical, climatic, economic, and land-use data about the states affected. And by conducting open ended analysis I attempted to uncover a very small subset of the trends buried within this dataset. 
 
 Uplpading and understanding the data was the first step in this process. I downloaded the data from Purdue University’s Laboratory for Advancing Sustainable Critical Infrastructure, at https://engineering.purdue.edu/LASCI/research-data/outages.
 
@@ -57,17 +58,16 @@ The dataset contains **1534 rows** and focuses on the following relevant columns
 This  selection of columns ensures focus on essential data for understanding and analyzing power outages, their duration, and their impacts across the U.S.
 
 
-## Data Cleaning and Exploratory Data Analysis
+## **Data Cleaning and Exploratory Data Analysis**
 
 ### Data Cleaning
 The dataset was cleaned using the following steps:
 1. **Column Selection:** Irrelevant columns were dropped, focusing on features listed above.
 2. **Date-Time Conversion:** Combined `OUTAGE.START.DATE` and `OUTAGE.START.TIME` into a single column. Similarly, combined restoration date and time.
 3. **Handling Missing Values:** Zero values in `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW` were replaced with `NaN` since these represent missing data.
-4. **Urban Feature Engineering:** Combined urban population statistics (`POPPCT_URBAN`, `POPDEN_URBAN`, and `AREAPCT_URBAN`) into a single column representing urban characteristics.
 
 ### Exploratory Data Analysis
- - Exploratory data analysis of the outages dataset allowed me to better understand the data I was working with: Understand the features and thier relations. These steps would allow me to stage more complex missingness and modeling questions later in the project
+ Exploratory data analysis of the outages dataset allowed me to better understand the data I was working with: Understand the features and thier relations. These steps would allow me to stage more complex missingness and modeling questions later in the project
 
 #### Univariate Analysis - Exploring single Variables
 
@@ -124,7 +124,7 @@ From there I looked at the distribution of customers affected. This was to under
 <iframe
   src="assets/climate_agg_outages.html"
   width="100%"
-  height="400"
+  height="300"
   frameborder="0"
 ></iframe>
 
@@ -138,7 +138,7 @@ From there I looked at the distribution of customers affected. This was to under
 ></iframe>
 ---
 
-## Assessment of Missingness
+## **Assessment of Missingness**
 
 ### NMAR Analysis
 `OUTAGE.DURATION` is likely **Not Missing at Random (NMAR)** because its missingness depends on whether reporting agencies provided this information during the outages.
@@ -205,8 +205,7 @@ The first step in missingness dependecy is to look at the distribution of cause 
    - Conclusion: At This p-value we fail to reject the null hypothesis in favor of the alterhante meaning the distribtuion is not very different wehn duration is missing, meaning there is likely no dependency between the missingness of Duration and the Customers Affected
 
 ---
-
-### Hypothesis Test: Outage Duration and Residential Electricity Prices
+### **Hypothesis Test:** Outage Duration and Residential Electricity Prices
 
 For this section I will be testing whetere outage duration differs between low and high residiantial price areas.
 
@@ -239,7 +238,7 @@ Below is a histogram showing the empirical distribution of permutation differenc
 
 ---
 
-## Framing a Prediction Problem
+## **Framing a Prediction Problem**
 
 ### Problem Statement
 
@@ -253,7 +252,7 @@ By focusing on these features and using MAE, I aim to create a model that is bot
 
 ---
 
-## Baseline Model
+## **Baseline Model**
 
 For my baseline model, I aimed to predict **outage duration** (`OUTAGE.DURATION`) using two features:
 1. **Number of Customers Affected** (`CUSTOMERS.AFFECTED`) - Quantitative
@@ -281,7 +280,8 @@ This baseline model is simple and gives a starting point for further improvement
 
 ---
 
-## Final Model
+## **Final Model**
+
 ### Final Model and Feature Selection
 
 For my final model, I implemented a search algorithm to determine the best combination of features for predicting outage duration (`OUTAGE.DURATION`). The model evaluated different subsets of features based on their performance, and measured their performance based on **Mean Absolute Error (MAE)**. 
@@ -333,7 +333,7 @@ By automating feature selection, I allowed the data to guide the process of buil
 
 ---
 
-## Fairness Analysis
+## **Fairness Analysis**
 
 ### Groups for Comparison
 For the fairness analysis, I compared two groups: **highly affected outages** (with customers affected above the median) and **lowly affected outages** (with customers affected at or below the median). These groups were chosen to investigate if the model performs differently based on the number of customers affected.
@@ -365,6 +365,4 @@ The figure below shows the distribution of the MAE differences under the null hy
   frameborder="0"
 ></iframe>
 
-
-This README file is structured for clear communication of analysis, methods, and findings while aligning with the structure provided in your Jupyter notebook. You can copy and paste this directly into your README file. Let me know if you need further refinements!
 
