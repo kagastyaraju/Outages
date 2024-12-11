@@ -177,9 +177,9 @@ The first step in missingness dependecy is to look at the distribution of cause 
    - Conclusion: This p-value indicates rejection of the null hypothesis in favor of the alterhante meaning Missingness in `OUTAGE.DURATION` liekley depends on `CAUSE.CATEGORY`.
 
 
-2. **Month:**
+2. **Customers Affected**
 
-   Here we look at a violin plot showing the distribution of cause category given the missingness of duration. 
+   Here we look at a violin plot showing the distribution of Customers Affected given the missingness of duration. 
 
 <iframe
   src="assets/customers_affected_violinplot.html"
@@ -211,27 +211,27 @@ The first step in missingness dependecy is to look at the distribution of cause 
 For this section I will be testing whetere outage duration differs between low and high residiantial price areas.
 
 #### Hypotheses:
-- **Null (\(H_0\))**: The mean outage duration is the same for low and high residential electricity price areas.
-- **Alternative (\(H_A\))**: The mean outage duration differs between low and high residential electricity price areas.
+- **Null**: The mean outage duration is the same for low and high residential electricity price areas.
+- **Alternative**: The mean outage duration differs between low and high residential electricity price areas.
 
 #### Test Statistic and Significance Level:
-- **Test Statistic**: I chose the difference in means (\( \text{Mean}_{\text{low}} - \text{Mean}_{\text{high}} \)) because it directly compares the groups of interest.
-- **Significance Level (\( \alpha \))**: I used a standard significance level of 0.05.
+- **Test Statistic**: I chose the difference in means because it directly compares the groups of interest.
+- **Significance Level**: I used a standard significance level of 0.05.
 
 #### Results:
 - **Observed Difference**: \( 397.914 \) minutes.
 - **P-value**: \( 0.1970 \).
 
 #### Conclusion:
-Since the p-value (\( 0.1970 \)) is greater than \( \alpha = 0.05 \), I fail to reject the null hypothesis. There isn’t enough evidence to conclude that outage durations differ significantly between low and high residential electricity price areas. The observed difference could simply be due to random chance.
+Since the p-value 0.1970  is greater than  0.05, I fail to reject the null hypothesis. There isn’t enough evidence to conclude that outage durations differ significantly between low and high residential electricity price areas. The observed difference could simply be due to random chance.
 
 #### Visualization:
 Below is a histogram showing the empirical distribution of permutation differences. The dashed red line represents the observed difference.
 
 <iframe
   src="assets/permutation_diff_price_group.html"
-  width="800"
-  height="600"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
 
