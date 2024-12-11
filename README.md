@@ -282,28 +282,90 @@ This baseline model is simple and gives a starting point for further improvement
 ---
 
 ## Final Model
-### Features
-- Added: `CLIMATE.REGION`, `MONTH`, `TOTAL.PRICE`, `TOTAL.SALES`, `TOTAL.CUSTOMERS`
-- Algorithm: Decision Tree Classifier
-- Tuning: GridSearchCV
-- Best Parameters:
-  - `criterion`: `entropy`
-  - `max_depth`: 10
-  - `min_samples_split`: 5
-- F1 Score: **0.89**
+### Final Model and Feature Selection
+
+For my final model, I implemented a search algorithm to determine the best combination of features for predicting outage duration (`OUTAGE.DURATION`). The model evaluated different subsets of features based on their performance, and measured their performance based on **Mean Absolute Error (MAE)**. 
+
+The features selected by this process are:
+
+- **Quantitative Features**:
+  - `DEMAND.LOSS.MW`
+  - `CUSTOMERS.AFFECTED`
+  - `POPDEN_URBAN`
+  - `TOTAL.PRICE`
+- **Nominal Features**:
+  - `U.S._STATE`
+  - `CAUSE.CATEGORY`
+---
+
+### Modeling Algorithm and Hyperparameters
+
+I used **Linear Regression** as the modeling algorithm, integrated within a preprocessing pipeline:
+- **Numerical Features**:
+  - Scaled using `StandardScaler`.
+  - Since the model couldn't run given missing values I imputed with the median.
+- **Categorical Features**:
+  - Encoded using `OneHotEncoder`, with support for unknown categories.
+  - Missing values were imputed with a placeholder value (`missing`) this would make sure that missing values again wouldn't affect the model perforamce
+
+The pipeline was tested on various combinations of features, using a loop to evaluate their performance. This approach allowed an unbiased feature selection process based on the data and MAE
+
+---
+
+### Model Performance
+
+- **Final Model Performance**:
+  - Selected Features: `DEMAND.LOSS.MW`, `CUSTOMERS.AFFECTED`, `POPDEN_URBAN`, `TOTAL.PRICE`, `U.S._STATE`, `CAUSE.CATEGORY`
+  - Mean Absolute Error (MAE): **1944.39 minutes**
+
+- **Baseline Model Performance**:
+  - Features: `CUSTOMERS.AFFECTED`, `CAUSE.CATEGORY`
+  - Mean Absolute Error (MAE): **2358.12 minutes**
+
+The final model improved upon the baseline by reducing the prediction error by approximately **400 minutes**. 
+
+---
+
+### Conclusion
+
+By automating feature selection, I allowed the data to guide the process of building a better model. The final feature set effectively captures the factors influencing outage duration, leading to a more accurate and actionable prediction model.
+
 
 ---
 
 ## Fairness Analysis
-### Groups
-- Group X: Outages >3000 minutes
-- Group Y: Outages ≤3000 minutes
+## Fairness Analysis
+
+### Groups for Comparison
+For the fairness analysis, I compared two groups: **highly affected outages** (with customers affected above the median) and **lowly affected outages** (with customers affected at or below the median). These groups were chosen to investigate if the model performs differently based on the number of customers affected.
+
+### Evaluation Metric
+I used **Mean Absolute Error (MAE)** as the evaluation metric because it quantifies the average prediction error in a straightforward and interpretable way. This is ideal for understanding prediction accuracy across the two groups.
+
+### Hypotheses
+- **Null Hypothesis:** The model is fair. The MAE for highly and lowly affected groups is similar, and any observed difference is due to random chance.
+- **Alternative Hypothesis:** The model is unfair. The MAE for highly and lowly affected groups is significantly different.
+
+### Test Statistic and Significance Level
+The test statistic used was the **difference in MAE** between the two groups. I set the significance level (\(\alpha\)) to **0.05**.
 
 ### Results
-- P-value: **0.01**
-- Conclusion: Model performance significantly differs across groups.
+- **Observed MAE Difference:** 1972.95
+- **P-value:** 0.0
 
----
+### Conclusion
+Since the p-value is less than the significance level alpha = 0.05, I reject the null hypothesis. This indicates that the model's performance differs significantly between highly and lowly affected groups, suggesting potential unfairness.
+
+### Visualization
+The figure below shows the distribution of the MAE differences under the null hypothesis, with the observed difference marked:
+
+<iframe
+  src="assets/permutation_mae_test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 
 This README file is structured for clear communication of analysis, methods, and findings while aligning with the structure provided in your Jupyter notebook. You can copy and paste this directly into your README file. Let me know if you need further refinements!
 
