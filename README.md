@@ -242,21 +242,42 @@ Below is a histogram showing the empirical distribution of permutation differenc
 ## Framing a Prediction Problem
 
 ### Problem Statement
-This project predicts the **cause of a power outage** as a binary classification problem: severe weather vs. intentional attacks.
 
-### Features
-- `NERC.REGION`, `CLIMATE.REGION`, `YEAR`, `MONTH`, `TOTAL.PRICE`, `TOTAL.SALES`, `URBAN`
+For this project, I am creating a **regression model** where the goal is to predict the **duration of power outages (OUTAGE.DURATION)**. I chose **outage duration** as the **response variable** because it is critical for understanding the severity of outages, improving preparedness, and allowing improved resource allocation for restoration efforts.
 
-### Metric
-The **F1 Score** accounts for class imbalance.
+At the **time of prediction**, I assume we would know features like the **number of customers affected (CUSTOMERS.AFFECTED)** and the **cause of the outage (CAUSE.CATEGORY)**. These are reasonable inputs because they are typically available shortly after an outage begins or is reported.
+
+To evaluate the performance of the regression model, I am using **Mean Absolute Error (MAE)** as the **evaluation metric**. I chose MAE because it provides a clear measure of prediction accuracy by quantifying the average difference between predicted and actual durations in minutes. Unlike metrics such as Mean Squared Error, MAE is less sensitive to outliers, making it a practical choice for understanding average model performance.
+
+By focusing on these features and using MAE, I aim to create a model that is both interpretable and effective for predicting outage durations in real-world scenarios.
 
 ---
 
 ## Baseline Model
-### Features
-- `NERC.REGION`, `ANOMALY.LEVEL`, `YEAR`, `URBAN`
-### Performance
-- F1 Score: **0.76**
+
+For my baseline model, I aimed to predict **outage duration** (`OUTAGE.DURATION`) using two features:
+1. **Number of Customers Affected** (`CUSTOMERS.AFFECTED`) - Quantitative
+2. **Cause Category** (`CAUSE.CATEGORY`) - Nominal
+
+Predicting outage duration is crucial for efficient resource allocation, minimizing disruptions, and helping communities and utilities better prepare for and respond to power outages.
+
+#### Feature Encoding:
+- I left **`CUSTOMERS.AFFECTED`** as-is since it’s a numeric column.
+- I used **one-hot encoding** for **`CAUSE.CATEGORY`** to handle its categorical nature.
+
+#### Model:
+I used a **Linear Regression** model. To preprocess the data:
+- Numeric features were passed through directly.
+- Categorical features were one-hot encoded using a pipeline.
+
+I split the dataset into training (80%) and test (20%) sets to evaluate the model.
+
+#### Performance:
+The **Mean Absolute Error (MAE)** on the test set was **X.XX minutes**. This metric indicates the average difference between the actual and predicted outage durations.
+
+#### Reflection:
+This baseline model is simple and gives a starting point for further improvements. While the MAE provides some insight into the model’s accuracy, I believe it could be improved by incorporating additional features (e.g., climate data, residential electricity prices) or trying a more sophisticated model.
+
 
 ---
 
