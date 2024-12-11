@@ -334,7 +334,6 @@ By automating feature selection, I allowed the data to guide the process of buil
 ---
 
 ## Fairness Analysis
-## Fairness Analysis
 
 ### Groups for Comparison
 For the fairness analysis, I compared two groups: **highly affected outages** (with customers affected above the median) and **lowly affected outages** (with customers affected at or below the median). These groups were chosen to investigate if the model performs differently based on the number of customers affected.
