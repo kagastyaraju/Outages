@@ -141,7 +141,10 @@ From there I looked at the distribution of customers affected. This was to under
 ## **Assessment of Missingness**
 
 ### NMAR Analysis
-`OUTAGE.DURATION` is likely **Not Missing at Random (NMAR)** because its missingness depends on whether reporting agencies provided this information during the outages.
+
+I believe the 'CAUSE.CATEGORY.DETAIL' column might be NMAR (Not Missing At Random). The missingness in this column could be due to utility companies not fully investigating or reporting detailed causes for certain outages. For instance, an outage categorized as “equipment failure” might not have the specific specific details if the issue had many overlapping problems or if the investigation was left incomplete. The resources to investigate power outages may not be worth it when this is a continous occurence.
+
+To potentially make this missingness MAR (Missing At Random), additional data about the reporting protocols used by utilities or the resources allocated to post-outage investigations would be useful.
 
 ### Dependency Analysis
 
